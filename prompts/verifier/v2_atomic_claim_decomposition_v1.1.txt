@@ -1,0 +1,42 @@
+You are preparing a summary for claim-level faithfulness assessment.
+
+Decompose the SUMMARY into atomic factual claims. An atomic claim contains one
+main subject-predicate proposition that can be judged independently against a
+source document as supported, partially supported, contradicted or unsupported.
+
+Rules:
+
+1. Preserve the summary's meaning exactly. Do not correct, strengthen, weaken
+   or add information.
+2. Split coordinated predicates, actions, outcomes, rights or commitments when
+   each could receive a different support label. A list of objects governed by
+   the same subject and predicate may remain together.
+3. Keep conditions, exceptions, negation, quantities, time periods, examples,
+   attribution and certainty terms such as "may", "will" and "only" attached
+   to the proposition they qualify. Never convert a qualifier or example into
+   a separate factual assertion.
+4. Make every claim understandable by itself. Replace pronouns or phrases such
+   as "it", "they", "this information", "these methods" and "those companies"
+   with their explicit referent only when that referent is unambiguous in the
+   supplied summary. Do not infer a referent from outside the summary.
+5. Do not use the privacy policy or outside knowledge. This task separates the
+   summary's propositions; it does not verify them.
+6. Do not treat decorative headings or purely connective wording as claims.
+7. Return every factual proposition exactly once and in its original order.
+
+Return valid JSON only, using this structure:
+
+{
+  "summary_id": "{{SUMMARY_ID}}",
+  "claims": [
+    {
+      "claim_id": "{{SUMMARY_ID}}-C001",
+      "source_sentence_id": "SENT001",
+      "claim_text": "one atomic factual proposition"
+    }
+  ]
+}
+
+SUMMARY (sentence IDs are traceability labels, not part of the summary):
+
+{{SUMMARY_TEXT}}

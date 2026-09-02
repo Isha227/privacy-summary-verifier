@@ -1,0 +1,54 @@
+study_name: privacy_policy_summarisation_pilot
+random_seed: 20260812
+temperature: 0.0
+max_output_tokens: 1500
+timeout_seconds: 120
+retries_on_technical_failure: 2
+output_language: English
+preprocess_boundaries:
+  PILOT01:
+    start: Mozilla Privacy Policy
+    end: Outdated Policies
+  PILOT03:
+    start: Your privacy is critically important to us.
+    end: Sections
+reproducibility_check:
+  policy_id: PILOT02
+  model_family: gpt
+  prompt_strategy: zero
+  total_runs: 3
+faithfulness:
+  policy_id: PILOT02
+  blind_ids: [S027, S014, S015]
+  human_labels: [Supported, Partially supported, Unsupported, Contradicted]
+  gemini_model: gemini-3.5-flash-lite
+  gemini_temperature: 0.0
+  gemini_free_tier: true
+  minicheck_model: flan-t5-large
+  prepared_dir: data/pilot/faithfulness
+  results_dir: data/pilot/evaluations/faithfulness
+models:
+  gpt:
+    provider: openai
+    model_id: gpt-5.6-luna
+    temperature: null  # Unsupported by this model; provider-controlled
+  llama:
+    provider: together
+    model_id: meta-llama/Llama-3.3-70B-Instruct-Turbo
+    temperature: 0.0
+  mistral:
+    provider: mistral
+    model_id: mistral-large-2512
+    temperature: 0.0
+prompts:
+  zero: prompts/zero_v1.0.txt
+  role: prompts/role_v1.0.txt
+  structured: prompts/structured_v1.0.txt
+paths:
+  raw: data/pilot/raw
+  clean: data/pilot/clean
+  metadata: data/pilot/metadata/policies.csv
+  outputs: data/pilot/outputs
+  logs: data/pilot/logs/generation_log.csv
+  evaluations: data/pilot/evaluations/metrics.csv
+  anonymised: data/pilot/anonymised

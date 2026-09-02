@@ -1,0 +1,83 @@
+study_name: opp115_historical_privacy_policy_extension
+study_version: 1.0
+design_status: frozen_after_supervisor_approval_before_generation
+approval_date: 2026-08-27
+prompt_version: 1.2
+random_seed: 20260827
+temperature: 0.0
+max_output_tokens: 6000
+timeout_seconds: 120
+retries_on_technical_failure: 2
+output_language: English
+target_word_range: null
+
+models:
+  gpt:
+    provider: openai
+    model_id: gpt-5.6-luna
+    temperature: null
+  llama:
+    provider: together
+    model_id: meta-llama/Llama-3.3-70B-Instruct-Turbo
+    temperature: 0.0
+  mistral:
+    provider: mistral
+    model_id: mistral-large-2512
+    temperature: 0.0
+
+prompts:
+  basic_direct: prompts/v2/basic_direct_v1.2.txt
+  basic_role_guided: prompts/v2/basic_role_guided_v1.2.txt
+  basic_structured: prompts/v2/basic_structured_v1.2.txt
+  safety_focused_direct: prompts/v2/safety_focused_direct_v1.2.txt
+  safety_focused_role_guided: prompts/v2/safety_focused_role_guided_v1.2.txt
+  safety_focused_structured: prompts/v2/safety_focused_structured_v1.2.txt
+
+paths:
+  clean: data/opp115/frozen/clean
+  metadata: data/opp115/frozen/metadata/policies.csv
+  outputs: data/opp115/experiment/outputs
+  logs: data/opp115/experiment/logs/generation_log.csv
+  evaluations: data/opp115/experiment/evaluations/readability_compression.csv
+  anonymised: data/opp115/experiment/anonymised
+
+faithfulness:
+  blind_ids: all
+  blinding_key: data/opp115/experiment/anonymised/BLINDING_KEY_RESTRICTED.csv
+  human_labels: [Supported, Partially supported, Unsupported, Contradicted]
+  create_human_templates: false
+  gemini_model: gemini-3.5-flash-lite
+  gemini_evaluator_version: source-passage-ids-v2
+  evidence_reference_mode: source_passage_ids
+  gemini_temperature: 0.0
+  gemini_free_tier: true
+  gemini_batch_delay_seconds: 10
+  gemini_max_claims_per_batch: 50
+  gemini_max_evidence_passages: 20
+  minicheck_model: flan-t5-large
+  prepared_dir: data/opp115/experiment/faithfulness/prepared
+  results_dir: data/opp115/experiment/evaluations/faithfulness
+
+opp115_coverage:
+  version: 1.0
+  source_unit_prompt_version: v2
+  model: gemini-3.5-flash-lite
+  temperature: 0.0
+  max_output_tokens: 32768
+  timeout_seconds: 600
+  max_units_per_request: 100
+  request_delay_seconds: 10
+  free_tier: true
+  output_dir: data/opp115/experiment/coverage
+
+opp115_coverage_v3:
+  version: 3.0
+  source_unit_prompt_version: v3
+  model: gemini-3.5-flash-lite
+  temperature: 0.0
+  max_output_tokens: 32768
+  timeout_seconds: 600
+  max_units_per_request: 100
+  request_delay_seconds: 10
+  free_tier: true
+  output_dir: data/opp115/experiment/coverage_v3

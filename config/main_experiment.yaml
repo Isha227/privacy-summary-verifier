@@ -1,0 +1,35 @@
+study_name: privacy_policy_summarisation_main_study
+random_seed: 20260814
+temperature: 0.0
+max_output_tokens: 1500
+timeout_seconds: 120
+retries_on_technical_failure: 2
+output_language: English
+
+models:
+  gpt:
+    provider: openai
+    model_id: gpt-5.6-luna
+    temperature: null  # Unsupported by this model; provider-controlled
+  llama:
+    provider: together
+    model_id: meta-llama/Llama-3.3-70B-Instruct-Turbo
+    temperature: 0.0
+  mistral:
+    provider: mistral
+    model_id: mistral-large-2512
+    temperature: 0.0
+
+prompts:
+  zero: prompts/zero_v1.0.txt
+  role: prompts/role_v1.0.txt
+  structured: prompts/structured_v1.0.txt
+
+paths:
+  raw: data/main/raw
+  clean: data/main/clean
+  metadata: data/main/metadata/policies.csv
+  outputs: data/main/outputs
+  logs: data/main/logs/generation_log.csv
+  evaluations: data/main/evaluations/metrics.csv
+  anonymised: data/main/anonymised

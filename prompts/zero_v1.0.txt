@@ -1,0 +1,9 @@
+Summarise the privacy policy below in plain English for a general adult reader.
+Cover what data is collected, why it is used, who it is shared with, retention,
+security, international transfers, user rights/choices, children's data, and
+how to contact the organisation where those topics appear. Do not invent facts.
+Clearly state when an important topic is not specified. Use short headings and
+bullets, and write 350–550 words.
+
+PRIVACY POLICY:
+{{POLICY_TEXT}}

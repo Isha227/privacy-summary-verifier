@@ -1,0 +1,71 @@
+study_name: privacy_policy_prompt_intervention_v2
+study_version: 2.1
+design_status: frozen_before_generation_after_prompt_format_refinement
+prompt_version: 1.1
+random_seed: 20260822
+temperature: 0.0
+max_output_tokens: 6000
+timeout_seconds: 120
+retries_on_technical_failure: 2
+output_language: English
+
+models:
+  gpt:
+    provider: openai
+    model_id: gpt-5.6-luna
+    temperature: null
+  llama:
+    provider: together
+    model_id: meta-llama/Llama-3.3-70B-Instruct-Turbo
+    temperature: 0.0
+  mistral:
+    provider: mistral
+    model_id: mistral-large-2512
+    temperature: 0.0
+
+# The key records both the prompt set and the strategy in the generation log.
+prompts:
+  basic_zero_shot: prompts/v2/basic_zero_shot_v1.1.txt
+  basic_role: prompts/v2/basic_role_v1.1.txt
+  basic_structured: prompts/v2/basic_structured_v1.1.txt
+  source_alignment_zero_shot: prompts/v2/source_alignment_zero_shot_v1.1.txt
+  source_alignment_role: prompts/v2/source_alignment_role_v1.1.txt
+  source_alignment_structured: prompts/v2/source_alignment_structured_v1.1.txt
+
+paths:
+  clean: data/pilot/clean
+  metadata: data/v2_prompt_intervention/metadata/policies.csv
+  outputs: data/v2_prompt_intervention/outputs
+  logs: data/v2_prompt_intervention/logs/generation_log.csv
+  evaluations: data/v2_prompt_intervention/evaluations/readability_compression.csv
+  anonymised: data/v2_prompt_intervention/anonymised
+
+v2_atomic_claims:
+  model: gemini-3.5-flash-lite
+  temperature: 0.0
+  timeout_seconds: 300
+  decomposition_version: 1.2
+  prompt_template: prompts/verifier/v2_atomic_claim_decomposition_v1.2.txt
+  output_dir: data/v2_prompt_intervention/evaluations/claims
+
+v2_statements:
+  version: 1.0
+  output_dir: data/v2_prompt_intervention/evaluations/statements
+
+v2_statement_verifier:
+  version: 1.3
+  model: gemini-2.5-flash
+  temperature: 0.0
+  max_output_tokens: 8192
+  timeout_seconds: 300
+  max_statements_per_batch: 5
+  batch_delay_seconds: 3
+  output_dir: data/v2_prompt_intervention/evaluations/statement_verification
+
+v2_source_unit_identification:
+  version: 1.0
+  model: gemini-2.5-flash
+  temperature: 0.0
+  max_output_tokens: 8192
+  timeout_seconds: 300
+  output_dir: data/v2_prompt_intervention/evaluations/source_unit_identification

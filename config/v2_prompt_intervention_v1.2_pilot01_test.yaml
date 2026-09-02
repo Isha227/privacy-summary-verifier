@@ -1,0 +1,40 @@
+study_name: privacy_policy_prompt_intervention_v2_pilot01_test
+study_version: 2.2-test
+design_status: provider_validated_prompt_smoke_test
+prompt_version: 1.2
+random_seed: 20260823
+temperature: 0.0
+max_output_tokens: 6000
+timeout_seconds: 120
+retries_on_technical_failure: 2
+output_language: English
+
+models:
+  gpt:
+    provider: openai
+    model_id: gpt-5.6-luna
+    temperature: null
+  llama:
+    provider: together
+    model_id: meta-llama/Llama-3.3-70B-Instruct-Turbo
+    temperature: 0.0
+  mistral:
+    provider: mistral
+    model_id: mistral-large-2512
+    temperature: 0.0
+
+prompts:
+  basic_direct: prompts/v2/basic_direct_v1.2.txt
+  basic_role_guided: prompts/v2/basic_role_guided_v1.2.txt
+  basic_structured: prompts/v2/basic_structured_v1.2.txt
+  safety_focused_direct: prompts/v2/safety_focused_direct_v1.2.txt
+  safety_focused_role_guided: prompts/v2/safety_focused_role_guided_v1.2.txt
+  safety_focused_structured: prompts/v2/safety_focused_structured_v1.2.txt
+
+paths:
+  clean: data/pilot/clean
+  metadata: data/v2_prompt_intervention_v1_2/test/metadata_pilot01.csv
+  outputs: data/v2_prompt_intervention_v1_2/test/outputs
+  logs: data/v2_prompt_intervention_v1_2/test/logs/generation_log.csv
+  evaluations: data/v2_prompt_intervention_v1_2/test/evaluations/readability_compression.csv
+  anonymised: data/v2_prompt_intervention_v1_2/test/anonymised

@@ -1,0 +1,17 @@
+Summarise the privacy policy below in plain English for a general adult reader with no specialist legal or privacy knowledge.
+
+Before returning the final summary, follow this process internally:
+
+1. Identify the information a non-specialist reader needs to understand how the organisation handles personal information, what consequences this may have, and what rights or choices are available.
+2. Rewrite that information clearly and concisely without changing its meaning.
+3. Check every factual statement against the privacy policy and remove any unsupported assumption.
+4. Check that important source information has not been left out.
+5. Check that conditions, exceptions, limitations, quantities, time periods and distinctions such as "may," "will" and "only" have been preserved.
+
+Write the summary as continuous prose using complete sentences and short paragraphs. Do not use headings, bullet points, tables or numbered lists.
+
+Return only the final summary. Do not show the process or any internal reasoning.
+
+PRIVACY POLICY:
+
+{{POLICY_TEXT}}
