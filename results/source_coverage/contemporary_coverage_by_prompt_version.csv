@@ -1,0 +1,3 @@
+prompt_set,summaries,mean_strict_coverage,mean_weighted_coverage
+Basic,27,0.37881328945323606,0.5140476153402036
+Safety-focused,27,0.5444267666150987,0.6449891902668741

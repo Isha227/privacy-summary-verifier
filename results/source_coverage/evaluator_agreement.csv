@@ -1,0 +1,2 @@
+comparison,n,exact_agreement,cohen_kappa,quadratic_weighted_kappa,mean_absolute_difference
+Gemini vs final human consensus,2970,0.7683501683501683,0.6397227464687413,0.8202856209275953,0.24983164983164982

@@ -1,0 +1,100 @@
+study_name: privacy_policy_prompt_intervention_v2
+study_version: 2.2
+design_status: complete_generation_automated_evaluation_human_faithfulness_and_final_coverage
+prompt_version: 1.2
+random_seed: 20260823
+temperature: 0.0
+max_output_tokens: 6000
+timeout_seconds: 120
+retries_on_technical_failure: 2
+output_language: English
+target_word_range: null
+
+models:
+  gpt:
+    provider: openai
+    model_id: gpt-5.6-luna
+    temperature: null
+  llama:
+    provider: together
+    model_id: meta-llama/Llama-3.3-70B-Instruct-Turbo
+    temperature: 0.0
+  mistral:
+    provider: mistral
+    model_id: mistral-large-2512
+    temperature: 0.0
+
+# Keys encode prompt set and strategy exactly as reported in the study.
+prompts:
+  basic_direct: prompts/basic/zero_shot.txt
+  basic_role_guided: prompts/basic/role_based.txt
+  basic_structured: prompts/basic/structured.txt
+  safety_focused_direct: prompts/safety_focused/zero_shot.txt
+  safety_focused_role_guided: prompts/safety_focused/role_based.txt
+  safety_focused_structured: prompts/safety_focused/structured.txt
+
+paths:
+  clean: data/pilot/clean
+  metadata: data/v2_prompt_intervention/metadata/policies.csv
+  outputs: data/v2_prompt_intervention_v1_2/outputs
+  logs: data/v2_prompt_intervention_v1_2/logs/generation_log.csv
+  evaluations: data/v2_prompt_intervention_v1_2/evaluations/readability_compression.csv
+  anonymised: data/v2_prompt_intervention_v1_2/anonymised
+
+v2_statements:
+  version: 1.0
+  output_dir: data/v2_prompt_intervention_v1_2/evaluations/statements
+
+v2_statement_verifier:
+  version: 1.3
+  model: gemini-3.5-flash-lite
+  temperature: 0.0
+  max_output_tokens: 16384
+  timeout_seconds: 300
+  max_statements_per_batch: 15
+  batch_delay_seconds: 3
+  output_dir: data/v2_prompt_intervention_v1_2/evaluations/gemini_statement_verification
+
+v2_source_unit_identification:
+  version: 1.0
+  model: gemini-3.5-flash-lite
+  temperature: 0.0
+  max_output_tokens: 8192
+  timeout_seconds: 300
+  output_dir: data/v2_prompt_intervention_v1_2/evaluations/gemini_source_units
+
+contemporary_source_unit_validation:
+  version: 2.0
+  model: gemini-3.5-flash-lite
+  temperature: 0.0
+  max_output_tokens: 32768
+  timeout_seconds: 600
+  output_dir: data/v2_prompt_intervention_v1_2/source_unit_method_validation
+
+v2_coverage_verifier:
+  version: 1.0
+  model: gemini-3.5-flash-lite
+  temperature: 0.0
+  max_output_tokens: 8192
+  timeout_seconds: 300
+  max_units_per_batch: 15
+  batch_delay_seconds: 3
+  output_dir: data/v2_prompt_intervention_v1_2/evaluations/gemini_preliminary_coverage
+
+v2_final_coverage_verifier:
+  version: 1.0
+  model: gemini-3.5-flash-lite
+  temperature: 0.0
+  max_output_tokens: 8192
+  timeout_seconds: 300
+  max_units_per_batch: 15
+  batch_delay_seconds: 3
+  retries: 3
+  retry_delay_seconds: 20
+  validation_retries: 3
+  validation_retry_delay_seconds: 5
+
+v2_evaluation:
+  root: data/v2_prompt_intervention_v1_2
+  minicheck_model: flan-t5-large
+  human_package_dir: data/v2_prompt_intervention_v1_2/human_evaluation
