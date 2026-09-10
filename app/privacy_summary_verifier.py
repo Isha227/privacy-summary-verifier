@@ -12,7 +12,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "v2_prompt_intervention_v1_2"
 SOURCE_DIR = ROOT / "data" / "pilot" / "clean"
 OUTPUT_DIR = DATA / "outputs"

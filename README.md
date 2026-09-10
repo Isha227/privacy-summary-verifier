@@ -1,55 +1,65 @@
 # Privacy Summary Verifier
 
-Code and final derived results for the MSc AI dissertation **Verifying
-LLM-Generated Plain-English Summaries of Privacy Policies**.
+Code and reproducibility outputs for an MSc experiment evaluating
+plain-English privacy-policy summaries.
 
-## What this study does
+## Experiment
 
-The study asks whether privacy policies can be summarised in accessible plain
-English while preserving their source information. It compares:
+Three language models (GPT, Llama and Mistral) generated summaries using
+zero-shot, role-based and structured prompting. Each strategy was tested with
+a Basic and a Safety-focused prompt version. The corpus contains 27 OPP-115
+policies and three contemporary policies from Mozilla, DuckDuckGo and
+Automattic, producing 540 summaries.
 
-- GPT, Llama and Mistral;
-- zero-shot, role-based and structured prompting;
-- Basic and Safety-focused prompt versions;
-- readability, conciseness, sentence source alignment and information coverage.
+The experiment measures:
 
-The experiment contains 30 policies and 540 summaries. Twenty-seven historical
-policies come from OPP-115. Three contemporary consumer-technology policies
-receive additional independent researcher evaluation.
+- accessibility through Flesch Reading Ease and source text retained;
+- sentence source alignment through Gemini labels, explanations and evidence;
+- information coverage through Gemini and human evaluation;
+- agreement between Gemini and human decisions on the contemporary subset;
+- compatibility of independently extracted source units with OPP-115 taxonomy.
 
-The 27-policy OPP-115 subset supports the inferential comparisons. The three
-contemporary policies provide the human-validation study and a matched
-taxonomy comparison; their results are not pooled into those significance
-tests.
-
-## Start here
-
-| If you want to… | Open… |
-|---|---|
-| Understand the study | docs/methodology.md |
-| Understand the labels | docs/evaluation_labels.md |
-| Read the findings | results/README.md |
-| Reproduce the workflow | docs/reproduction_guide.md |
-| Explore the prototype | docs/prototype_guide.md |
+Inferential tests use the 27 OPP-115 policies. The three contemporary policies
+form a separate human-validation study. RQ3 uses the same Gemini source-unit
+extraction on three historical and three contemporary policies, with the human
+units reported separately as validation.
 
 ## Repository structure
 
-- app — Streamlit evidence explorer.
-- config — frozen experiment and model settings.
-- prompts — Basic, Safety-focused and evaluator prompts.
-- src — generation, evaluation and analysis code.
-- notebooks — MiniCheck GPU notebook.
-- results — final, reader-friendly result tables and figures.
-- docs — method, labels and reproduction guidance.
-- data — local-data structure only; restricted data are not published.
-- tests — automated checks.
+```text
+app/         Streamlit prototype
+config/      final frozen experiment configurations
+data/        description of required local data
+prompts/     final Basic and Safety-focused prompts
+results/     compact result tables and figures
+src/         experiment and evaluation code
+tools/       audit, analysis and figure-generation code
+```
 
 ## Run the prototype
 
-Create a virtual environment, install requirements, then run:
+```powershell
+python -m venv .venv
+.\.venv\Scripts\pip install -r requirements.txt
+.\.venv\Scripts\streamlit run app\privacy_summary_verifier.py
+```
 
-    streamlit run app/privacy_summary_verifier.py
+The prototype requires the local experimental data described in
+`data/README.md`. Real API keys must be stored in `.env`; this file is excluded
+from Git. `.env.example` lists the required variable names without credentials.
 
-The full evidence explorer requires the derived local data described in
-data/README.md. API keys belong only in a local .env file. No summary in this
-repository is legal advice.
+## Reproduce the principal stages
+
+The PowerShell entry points are:
+
+- `run_v12_analysis.ps1` for the contemporary-policy experiment;
+- `run_opp115.ps1` for OPP-115 generation, verification and taxonomy mapping;
+- `run_current_source_units.ps1` for contemporary source-unit extraction;
+- `run_final_coverage.ps1` for final contemporary coverage evaluation;
+- `run_dashboard.ps1` for the prototype.
+
+Machine-readable final results are under `results/`. Large intermediate data,
+restricted blinding keys, researcher-identifying files and API credentials are
+not distributed.
+
+This repository is a research prototype. Its summaries are not legal advice.
