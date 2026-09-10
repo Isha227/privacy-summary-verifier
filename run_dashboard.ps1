@@ -7,4 +7,4 @@ if (-not (Test-Path $python)) {
 }
 
 Set-Location $project
-& $python -m streamlit run streamlit_v12_app.py
+& $python -m streamlit run app/privacy_summary_verifier.py

@@ -1,4 +1,6 @@
 .env
+/streamlit_v12_app.py
+/tests/test_streamlit_v12_app.py
 .venv/
 __pycache__/
 *.pyc
