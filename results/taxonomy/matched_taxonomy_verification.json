@@ -1,0 +1,31 @@
+{
+  "summary_rows": 540,
+  "policies": 30,
+  "corpus_summary_counts": {
+    "OPP-115": 486,
+    "Contemporary": 54
+  },
+  "agreement": {
+    "alignment": {
+      "n": 1393,
+      "exact_agreement": 0.9253409906676239,
+      "kappa": 0.23317718671430537
+    },
+    "coverage": {
+      "n": 2970,
+      "exact_agreement": 0.7683501683501683,
+      "kappa": 0.6397227464687413
+    }
+  },
+  "taxonomy": {
+    "historical_units": 151,
+    "contemporary_gemini_units": 114,
+    "contemporary_human_units": 165,
+    "historical_fit_percent": 94.70198675496688,
+    "contemporary_gemini_fit_percent": 92.10526315789474,
+    "contemporary_human_fit_percent": 96.96969696969697,
+    "historical_other": 8,
+    "contemporary_gemini_other": 9,
+    "contemporary_human_other": 5
+  }
+}

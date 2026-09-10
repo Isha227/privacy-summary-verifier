@@ -129,8 +129,30 @@ def prepare() -> dict:
             "exact_source_evidence": row["exact_source_evidence"],
         })
 
-    if len(rows) != 1177 or len({row["mapping_id"] for row in rows}) != 1177:
-        raise ValueError("Unified taxonomy input must contain 1,177 unique units")
+    # The four validated additions above already belong to the final Gemini v3
+    # extraction. Add the other Gemini units under stable IDs so the matched
+    # historical-contemporary analysis can use the same extraction procedure
+    # on both sides without duplicating those four existing mappings.
+    original_additions = {
+        blind_to_original[blind_id] for blind_id in additions
+        if blind_id in blind_to_original
+    }
+    for row in read_csv(GEMINI_UNITS):
+        if row["candidate_unit_id"] in original_additions:
+            continue
+        rows.append({
+            "mapping_id": f"CUR-GV3-{row['candidate_unit_id']}",
+            "dataset": "Contemporary Gemini source unit",
+            "policy_id": row["policy_id"],
+            "unit_id": row["candidate_unit_id"],
+            "important_information": row["important_information"],
+            "material_qualifiers": row.get("material_qualifiers", ""),
+            "exact_source_evidence": row["exact_source_evidence"],
+        })
+
+    expected_total = 1008 + 165 + len(gemini_lookup)
+    if len(rows) != expected_total or len({row["mapping_id"] for row in rows}) != expected_total:
+        raise ValueError(f"Unified taxonomy input must contain {expected_total:,} unique units")
     PREPARED.parent.mkdir(parents=True, exist_ok=True)
     with PREPARED.open("w", encoding="utf-8-sig", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=UNIT_FIELDS)
@@ -312,7 +334,7 @@ def audit() -> dict:
     result["valid_complete"] = all(result[key] == 0 for key in [
         "remaining", "duplicates", "unexpected", "invalid_primary", "invalid_secondary",
         "blank_explanations", "invalid_confidence",
-    ]) and result["unique_successful"] == 1177
+    ]) and result["unique_successful"] == len(expected)
     write_json(AUDIT, result)
     return result
 

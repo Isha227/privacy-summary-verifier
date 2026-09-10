@@ -12,11 +12,12 @@ Each row is an analysis result, not a new model response.
 ## Statistical tests
 
 - statistics/model_effects.csv — Friedman tests comparing the three models
-  using 30 policies as repeated blocks.
+  using the 27 OPP-115 policies as repeated blocks.
 - statistics/prompting_strategy_effects.csv — Friedman tests comparing
   zero-shot, role-based and structured prompting.
-- statistics/basic_vs_safety_focused.csv — paired Wilcoxon tests for 270
-  matched comparisons, with bootstrap intervals, rank-biserial effect sizes
+- statistics/basic_vs_safety_focused.csv — paired Wilcoxon tests for 243
+  matched policy-model-strategy comparisons, with bootstrap intervals,
+  rank-biserial effect sizes
   and Holm-adjusted p-values.
 
 ## Source coverage
@@ -34,7 +35,8 @@ for auditability, but it is not used as a principal reported outcome.
 ## Taxonomy
 
 - taxonomy/category_distribution.csv — source-unit counts across OPP-115.
-- taxonomy/historical_vs_contemporary.csv — descriptive corpus comparison.
+- taxonomy/historical_vs_contemporary.csv — matched three-policy comparison
+  using the same Gemini source-unit extraction, plus a separate human reference.
 - taxonomy/other_items_review.csv — researcher review of units initially
   mapped to Other.
 - taxonomy/validated_contemporary_additions.csv — valid Gemini additions.

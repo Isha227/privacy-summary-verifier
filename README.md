@@ -17,6 +17,11 @@ The experiment contains 30 policies and 540 summaries. Twenty-seven historical
 policies come from OPP-115. Three contemporary consumer-technology policies
 receive additional independent researcher evaluation.
 
+The 27-policy OPP-115 subset supports the inferential comparisons. The three
+contemporary policies provide the human-validation study and a matched
+taxonomy comparison; their results are not pooled into those significance
+tests.
+
 ## Start here
 
 | If you want to… | Open… |

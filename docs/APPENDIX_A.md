@@ -1,7 +1,7 @@
 # Appendix A: Source Code and Reproducibility Materials
 
 The source code, frozen prompt templates, experiment configurations,
-evaluation procedures, MiniCheck notebooks, prototype application and
+evaluation procedures, analysis scripts, prototype application and
 supporting documentation are available in the following private GitHub
 repository:
 
